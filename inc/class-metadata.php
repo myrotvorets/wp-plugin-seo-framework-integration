@@ -12,7 +12,18 @@ final class Metadata {
 	}
 
 	public function init(): void {
+		add_filter( 'the_seo_framework_title_from_generation', [ $this, 'the_seo_framework_title_from_generation' ], 10, 2 );
 		add_filter( 'the_seo_framework_meta_render_data', [ $this, 'the_seo_framework_meta_render_data' ], PHP_INT_MAX );
+	}
+
+	public function the_seo_framework_title_from_generation( $title, ?array $args ): string {
+		if ( null === $args && is_singular( 'criminal' ) ) {
+			$title = get_the_title();
+		} elseif ( null !== $args && ! empty( $args['id'] ) ) {
+			$title = get_the_title( $args['id'] );
+		}
+
+		return $title;
 	}
 
 	public function the_seo_framework_meta_render_data( array $data ): array {
