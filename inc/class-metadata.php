@@ -16,6 +16,11 @@ final class Metadata {
 		add_filter( 'the_seo_framework_meta_render_data', [ $this, 'the_seo_framework_meta_render_data' ], PHP_INT_MAX );
 	}
 
+	/**
+	 * @param mixed $title
+	 * @psalm-param array{id?: int}|null $args
+	 * @psalm-suppress RiskyTruthyFalsyComparison
+	 */
 	public function the_seo_framework_title_from_generation( $title, ?array $args ): string {
 		if ( null === $args && is_singular( 'criminal' ) ) {
 			$title = get_the_title();
@@ -23,7 +28,7 @@ final class Metadata {
 			$title = get_the_title( $args['id'] );
 		}
 
-		return $title;
+		return (string) $title;
 	}
 
 	public function the_seo_framework_meta_render_data( array $data ): array {
