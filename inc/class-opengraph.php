@@ -38,7 +38,7 @@ final class OpenGraph {
 			$excerpt = preg_replace( '/\s+/', ' ', $excerpt );
 		}
 
-		return $excerpt;
+		return (string) $excerpt;
 	}
 
 	/**
